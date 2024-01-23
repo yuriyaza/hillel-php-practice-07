@@ -11,12 +11,11 @@ return new class extends Migration {
             $posts->id();
             $posts->string('title', 100);
             $posts->string('content');
+            $posts->timestamp('created_at')->useCurrent();
+            $posts->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
 
             $posts->unsignedBigInteger('category_id');
             $posts->foreign('category_id')->references('id')->on('categories');
-
-            $posts->timestamp('created_at')->useCurrent();
-            $posts->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 

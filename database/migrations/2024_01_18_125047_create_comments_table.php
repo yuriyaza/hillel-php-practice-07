@@ -10,12 +10,11 @@ return new class extends Migration {
         Schema::create('comments', function (Blueprint $comments) {
             $comments->id();
             $comments->string('content');
+            $comments->timestamp('created_at')->useCurrent();
+            $comments->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
 
             $comments->unsignedBigInteger('post_id');
             $comments->foreign('post_id')->references('id')->on('posts');
-
-            $comments->timestamp('created_at')->useCurrent();
-            $comments->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 

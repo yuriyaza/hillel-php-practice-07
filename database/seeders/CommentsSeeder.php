@@ -10,22 +10,49 @@ class CommentsSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('Comments')->insert([
-            'id' => 1,
-            'content' => Lorem::text(100),
-            'post_id' => 3,
-        ]);
-
-        DB::table('Comments')->insert([
-            'id' => 2,
-            'content' => Lorem::text(100),
+        DB::table('comments')->insert([
+            'content' => Lorem::text(50),
             'post_id' => 1,
         ]);
 
-        DB::table('Comments')->insert([
-            'id' => 3,
-            'content' => Lorem::text(100),
+        DB::table('comments')->insert([
+            'content' => Lorem::text(50),
+            'post_id' => 1,
+        ]);
+
+        DB::table('comments')->insert([
+            'content' => Lorem::text(50),
+            'post_id' => 1,
+        ]);
+
+        DB::table('comments')->insert([
+            'content' => Lorem::text(50),
+            'post_id' => 1,
+        ]);
+
+        DB::table('comments')->insert([
+            'content' => Lorem::text(50),
             'post_id' => 2,
+        ]);
+
+        DB::table('comments')->insert([
+            'content' => Lorem::text(50),
+            'post_id' => 2,
+        ]);
+
+        DB::table('comments')->insert([
+            'content' => Lorem::text(50),
+            'post_id' => 3,
+        ]);
+
+        DB::table('comments')->insert([
+            'content' => Lorem::text(50),
+            'post_id' => 3,
+        ]);
+
+        DB::table('comments')->insert([
+            'content' => Lorem::text(50),
+            'post_id' => 3,
         ]);
     }
 }
