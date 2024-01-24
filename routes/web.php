@@ -17,10 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/blog', [App\Http\Controllers\BlogController::class, 'getBlog']);
+
 Route::get('/blog/addCategory', [App\Http\Controllers\BlogCategoryController::class, 'addCategory']);
 Route::get('/blog/updatePost', [App\Http\Controllers\BlogPostController::class, 'updatePost']);
 Route::get('/blog/deleteComment', [App\Http\Controllers\BlogCommentController::class, 'deleteComment']);
 
-Route::get('/blog', [App\Http\Controllers\BlogController::class, 'getBlog']);
 Route::get('/blog/{categoryId}', [App\Http\Controllers\BlogCategoryController::class, 'getCategories']);
 Route::get('/blog/{categoryId}/{postId}', [App\Http\Controllers\BlogPostController::class, 'getPosts']);

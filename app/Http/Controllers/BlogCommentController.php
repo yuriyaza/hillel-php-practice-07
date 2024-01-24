@@ -12,7 +12,7 @@ class BlogCommentController
         $id = $request->get('id');
 
         if (!$id) {
-            die();
+            dd('ID is not specified');
         }
 
         $result = DB::table('comments')
