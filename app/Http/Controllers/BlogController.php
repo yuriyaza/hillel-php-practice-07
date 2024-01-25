@@ -2,22 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Support\Facades\DB;
+use function Laravel\Prompts\select;
 
 class BlogController
 {
     public function getBlog(): void
     {
+        // Code with Query Builder
         $result = DB::table('categories')
-            ->select(
-                'id as category_id',
-                'name as category_name',
-                'description as category_description',
-                'created_at as category_created',
-                'updated_at as category_updated'
-            )
-            ->get();
-
+            ->select('name', 'description')
+            ->get()
+            ->toArray();
         dump($result);
+
+        // Code with ORM
+        $resultOrm = Category::all('name', 'description')
+            ->toArray();
+        dump($resultOrm);
     }
 }

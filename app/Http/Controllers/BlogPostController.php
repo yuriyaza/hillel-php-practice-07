@@ -9,23 +9,15 @@ class BlogPostController
 {
     public function getPosts($categoryId, $postId): void
     {
+        // Code with Query Builder
         $result = DB::table('categories')
             ->join('posts', 'posts.category_id', '=', 'categories.id')
             ->join('comments', 'comments.post_id', '=', 'posts.id')
-            ->select(
-                'posts.id as post_id',
-                'posts.title as post_title',
-                'posts.content as post_content',
-                'posts.created_at as post_created',
-                'posts.updated_at as post_updated',
-                'comments.id as comment_id',
-                'comments.content as comment_content',
-                'comments.created_at as comment_created',
-                'comments.updated_at as comment_updated'
-            )
+            ->select('posts.*', 'comments.content as comment',)
             ->where('categories.id', '=', $categoryId)
             ->where('posts.id', '=', $postId)
-            ->get();
+            ->get()
+            ->toArray();
 
         dump($result);
     }

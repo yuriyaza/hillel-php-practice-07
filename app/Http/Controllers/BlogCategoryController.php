@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use function Laravel\Prompts\table;
@@ -10,24 +11,21 @@ class BlogCategoryController
 {
     public function getCategories($categoryId): void
     {
+        // Code with Query Builder
         $result = DB::table('categories')
             ->join('posts', 'posts.category_id', '=', 'categories.id')
-            ->select(
-                'categories.id as category_id',
-                'categories.name as category_name',
-                'categories.description as category_description',
-                'categories.created_at as category_created',
-                'categories.updated_at as category_updated',
-                'posts.id as post_id',
-                'posts.title as post_title',
-                'posts.content as post_content',
-                'posts.created_at as post_created',
-                'posts.updated_at as post_updated'
-            )
+            ->select('categories.*', 'posts.title as post')
             ->where('categories.id', '=', $categoryId)
-            ->get();
+            ->get()
+            ->toArray();
+        dump('Query Builder', $result);
 
-        dump($result);
+        // Code with ORM
+        $resultOrm = Category::with('post')
+            ->where('categories.id', '=', $categoryId)
+            ->get()
+            ->toArray();
+        dump('ORM', $resultOrm);
     }
 
     public function addCategory(Request $request): void
