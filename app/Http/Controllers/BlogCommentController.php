@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,8 +16,13 @@ class BlogCommentController
             dd('ID is not specified');
         }
 
-        $result = DB::table('comments')
-            ->delete($id);
+        //Querybuilder
+//        $result = DB::table('comments')
+//            ->delete($id);
+
+        // ORM
+        $result = Comment::where('id', '=', $id)
+            ->delete();
 
         dump($result);
     }

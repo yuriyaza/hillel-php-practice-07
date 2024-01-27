@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\CreateCategoryList;
+use App\Models\Category;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -40,6 +42,14 @@ class BlogPostController
             ->execute();
 
         dump($result);
+
+        // Code with ORM
+        $resultOrm = Post::with('comment')
+            ->where('category_id', '=', $categoryId)
+            ->where('posts.id', '=', $postId)
+            ->get()
+            ->toArray();
+        dump($resultOrm);
     }
 
     public function updatePost(Request $request): void
@@ -48,12 +58,22 @@ class BlogPostController
         $newTitle = $request->get('title');
         $newContent = $request->get('content');
 
-        $result = DB::table('posts')
-            ->where('id', '=', $id)
+        // Query Builder
+//        $result = DB::table('posts')
+//            ->where('id', '=', $id)
+//            ->update([
+//                'title' => $newTitle,
+//                'content' => $newContent
+//            ]);
+
+
+        // ORM
+        $result = Post::where('id', '=', $id)
             ->update([
                 'title' => $newTitle,
                 'content' => $newContent
             ]);
+
 
         dump($result);
     }

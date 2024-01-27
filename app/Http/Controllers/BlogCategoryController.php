@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\CreateCategoryList;
 use App\Models\Category;
+use App\Repositories\BlogCategoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -53,11 +54,19 @@ class BlogCategoryController
         $newCategoryName = $request->get('name');
         $newCategoryDescription = $request->get('description');
 
-        $result = DB::table('categories')
-            ->insert([
-                'name' => $newCategoryName,
-                'description' => $newCategoryDescription
-            ]);
+        // Query builde
+//        $result = DB::table('categories')
+//            ->insert([
+//                'name' => $newCategoryName,
+//                'description' => $newCategoryDescription
+//            ]);
+
+        // ORM
+        $category = new Category;
+        $category->name = $newCategoryName;
+        $category->description = $newCategoryDescription;
+        $result = $category->save();
+
 
         dump($result);
     }
