@@ -2,7 +2,7 @@
 
 namespace App\Helpers;
 
-class CreateCategoryList
+class FormatCategoryList
 {
     protected array $sourceDataset = [];
     protected string $mainCategoryPrefix = '';
@@ -30,6 +30,7 @@ class CreateCategoryList
     {
         $totalList = [];
 
+
         foreach ($this->sourceDataset as $dataEntry) {
             $mainCategory = [];
             $subCategory = [];
@@ -51,9 +52,11 @@ class CreateCategoryList
                 }
             }
 
-            // Формуємо категорію + підкатегорію, назва підкатегорії задається за отриманим префіксом
+            // Формуємо категорію + підкатегорію (при наявності), назва підкатегорії = $subCategoryPrefix
             if (count($subCategory) !== 0 && $this->subCategoryPrefix !== '') {
                 $mainAndSubCategory = [...$mainCategory, $this->subCategoryPrefix => [$subCategory]];
+            } else {
+                $mainAndSubCategory = $mainCategory;
             }
 
             // Перевіряємо по ID, чи є вже така категорія в загальному списку та отримуємо її індекс
