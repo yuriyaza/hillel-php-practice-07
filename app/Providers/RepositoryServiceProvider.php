@@ -20,10 +20,10 @@ class RepositoryServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->app->bind(BlogCategoryInterface::class, BlogCategoryByORM::class);
-        $this->app->bind(BlogCommentInterface::class, BlogCommentByORM::class);
-        $this->app->bind(BlogInterface::class, BlogByORM::class);
-        $this->app->bind(BlogPostInterface::class, BlogPostByORM::class);
+        $this->app->bind(BlogCategoryInterface::class, BlogCategoryByQueryBuilder::class);
+        $this->app->bind(BlogCommentInterface::class, BlogCommentByQueryBuilder::class);
+        $this->app->bind(BlogInterface::class, BlogByQueryBuilder::class);
+        $this->app->bind(BlogPostInterface::class, BlogPostByQueryBuilder::class);
     }
 
     public function boot(): void
