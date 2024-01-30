@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Interfaces\BlogCategoryInterface;
+use App\Models\Interfaces\CategoryInterface;
 use Illuminate\Http\Request;
 
 class BlogCategoryController
 {
-    public function getCategories(BlogCategoryInterface $blogCategory, $categoryId)
+    public function getCategories(CategoryInterface $blogCategory, $categoryId)
     {
         dump(
-            $blogCategory->getCategories($categoryId)
+            $blogCategory->getCategory($categoryId)
         );
     }
 
-    public function addCategory(BlogCategoryInterface $blogCategory, Request $request)
+    public function addCategory(CategoryInterface $blogCategory, Request $request)
     {
         $categoryName = $request->get('name');
         $categoryDescription = $request->get('description');

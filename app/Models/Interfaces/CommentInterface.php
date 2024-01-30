@@ -2,7 +2,7 @@
 
 namespace App\Models\Interfaces;
 
-interface BlogCommentInterface
+interface CommentInterface
 {
     public function deleteComment($id);
 }

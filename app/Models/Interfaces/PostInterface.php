@@ -2,7 +2,7 @@
 
 namespace App\Models\Interfaces;
 
-interface BlogPostInterface
+interface PostInterface
 {
     public function getPosts($categoryId, $postId);
     public function updatePost($id, $title, $content);

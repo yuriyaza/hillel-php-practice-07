@@ -2,10 +2,10 @@
 
 namespace App\Models\Repositories;
 
-use App\Models\Interfaces\BlogCommentInterface;
+use App\Models\Interfaces\CommentInterface;
 use Illuminate\Support\Facades\DB;
 
-class BlogCommentByQueryBuilder implements BlogCommentInterface
+class CommentByQueryBuilder implements CommentInterface
 {
     public function deleteComment($id)
     {

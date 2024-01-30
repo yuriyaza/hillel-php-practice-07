@@ -2,8 +2,9 @@
 
 namespace App\Models\Interfaces;
 
-interface BlogCategoryInterface
+interface CategoryInterface
 {
-    public function getCategories($categoryId);
+    public function getBlogs();
+    public function getCategory($categoryId);
     public function addCategory($categoryName, $categoryDescription);
 }

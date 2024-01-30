@@ -3,11 +3,20 @@
 namespace App\Models\Repositories;
 
 use App\Models\Category;
-use App\Models\Interfaces\BlogCategoryInterface;
+use App\Models\Interfaces\BlogInterface;
+use App\Models\Interfaces\CategoryInterface;
 
-class BlogCategoryByORM implements BlogCategoryInterface
+class CategoryByOrm implements CategoryInterface
 {
-    public function getCategories($categoryId)
+    public function getBlogs()
+    {
+        $result = Category::all()
+            ->toArray();
+
+        return $result;
+    }
+
+    public function getCategory($categoryId)
     {
         $result = Category::with('post')
             ->where('categories.id', '=', $categoryId)

@@ -2,28 +2,31 @@
 
 namespace App\Providers;
 
-use App\Models\Interfaces\BlogCategoryInterface;
-use App\Models\Interfaces\BlogCommentInterface;
-use App\Models\Interfaces\BlogInterface;
-use App\Models\Interfaces\BlogPostInterface;
-use App\Models\Repositories\BlogByORM;
-use App\Models\Repositories\BlogByQueryBuilder;
-use App\Models\Repositories\BlogCategoryByORM;
-use App\Models\Repositories\BlogCategoryByQueryBuilder;
-use App\Models\Repositories\BlogCommentByORM;
-use App\Models\Repositories\BlogCommentByQueryBuilder;
-use App\Models\Repositories\BlogPostByORM;
-use App\Models\Repositories\BlogPostByQueryBuilder;
+use App\Models\Interfaces\CategoryInterface;
+use App\Models\Interfaces\CommentInterface;
+use App\Models\Interfaces\PostInterface;
+use App\Models\Repositories\CategoryByOrm;
+use App\Models\Repositories\CategoryByQueryBuilder;
+use App\Models\Repositories\CommentByOrm;
+use App\Models\Repositories\CommentByQueryBuilder;
+use App\Models\Repositories\PostByOrm;
+use App\Models\Repositories\PostByQueryBuilder;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->app->bind(BlogCategoryInterface::class, BlogCategoryByQueryBuilder::class);
-        $this->app->bind(BlogCommentInterface::class, BlogCommentByQueryBuilder::class);
-        $this->app->bind(BlogInterface::class, BlogByQueryBuilder::class);
-        $this->app->bind(BlogPostInterface::class, BlogPostByQueryBuilder::class);
+//      Прив'язка інтерфейсу до QueryBuilder або ORM. Не потрібне закоментувати.
+
+        $this->app->bind(CategoryInterface::class, CategoryByQueryBuilder::class);
+//        $this->app->bind(CategoryInterface::class, CategoryByOrm::class);
+
+        $this->app->bind(CommentInterface::class, CommentByQueryBuilder::class);
+//        $this->app->bind(CommentInterface::class, CommentByOrm::class);
+
+        $this->app->bind(PostInterface::class, PostByQueryBuilder::class);
+//        $this->app->bind(PostInterface::class, PostByOrm::class);
     }
 
     public function boot(): void

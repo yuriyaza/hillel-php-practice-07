@@ -3,17 +3,38 @@
 namespace App\Models\Repositories;
 
 use App\Helpers\FormatCategoryList;
-use App\Models\Interfaces\BlogCategoryInterface;
+use App\Models\Interfaces\CategoryInterface;
 use Illuminate\Support\Facades\DB;
 
-class BlogCategoryByQueryBuilder implements BlogCategoryInterface
+class CategoryByQueryBuilder implements CategoryInterface
 {
     public function __construct(FormatCategoryList $formatCategoryList)
     {
         $this->formatCategoryList = $formatCategoryList;
     }
 
-    public function getCategories($categoryId)
+    public function getBlogs()
+    {
+        $dataset = DB::table('categories')
+            ->select(
+                'id  as category_id',
+                'name as category_name',
+                'description as category_description',
+                'created_at as category_created_at',
+                'updated_at as category_updated_at',
+            )
+            ->get()
+            ->toArray();
+
+        $result = $this->formatCategoryList
+            ->setSourceDataset($dataset)
+            ->setMainCategoryPrefix('category')
+            ->execute();
+
+        return $result;
+    }
+
+    public function getCategory($categoryId)
     {
         $dataset = DB::table('categories')
             ->join('posts', 'posts.category_id', '=', 'categories.id')

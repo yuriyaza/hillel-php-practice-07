@@ -2,10 +2,10 @@
 
 namespace App\Models\Repositories;
 
-use App\Models\Interfaces\BlogPostInterface;
+use App\Models\Interfaces\PostInterface;
 use App\Models\Post;
 
-class BlogPostByORM implements BlogPostInterface
+class PostByOrm implements PostInterface
 {
     public function getPosts($categoryId, $postId)
     {

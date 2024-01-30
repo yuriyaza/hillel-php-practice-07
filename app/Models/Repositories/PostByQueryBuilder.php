@@ -3,10 +3,10 @@
 namespace App\Models\Repositories;
 
 use App\Helpers\FormatCategoryList;
-use App\Models\Interfaces\BlogPostInterface;
+use App\Models\Interfaces\PostInterface;
 use Illuminate\Support\Facades\DB;
 
-class BlogPostByQueryBuilder implements BlogPostInterface
+class PostByQueryBuilder implements PostInterface
 {
     public function __construct(FormatCategoryList $formatCategoryList)
     {

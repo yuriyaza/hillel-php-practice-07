@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Interfaces\BlogPostInterface;
+use App\Models\Interfaces\PostInterface;
 use Illuminate\Http\Request;
 
 class BlogPostController
 {
-    public function getPosts(BlogPostInterface $blogPost, $categoryId, $postId)
+    public function getPosts(PostInterface $blogPost, $categoryId, $postId)
     {
         dump(
             $blogPost->getPosts($categoryId, $postId)
         );
     }
 
-    public function updatePost(BlogPostInterface $blogPost, Request $request)
+    public function updatePost(PostInterface $blogPost, Request $request)
     {
         $id = $request->get('id');
         $title = $request->get('title');
