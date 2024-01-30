@@ -17,7 +17,7 @@ class RepositoryServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-//      Прив'язка інтерфейсу до QueryBuilder або ORM. Не потрібне закоментувати.
+//      Прив'язка інтерфейсу до QueryBuilder або ORM. Непотрібне закоментувати.
 
         $this->app->bind(CategoryInterface::class, CategoryByQueryBuilder::class);
 //        $this->app->bind(CategoryInterface::class, CategoryByOrm::class);

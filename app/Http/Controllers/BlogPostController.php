@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 
 class BlogPostController
 {
-    public function getPosts(PostInterface $blogPost, $categoryId, $postId)
+    public function getPost(PostInterface $blogPost, $categoryId, $postId)
     {
         dump(
-            $blogPost->getPosts($categoryId, $postId)
+            $blogPost->getPost($categoryId, $postId)
         );
     }
 

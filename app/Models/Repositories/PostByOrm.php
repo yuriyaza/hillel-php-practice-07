@@ -7,15 +7,15 @@ use App\Models\Post;
 
 class PostByOrm implements PostInterface
 {
-    public function getPosts($categoryId, $postId)
+    public function getPost($categoryId, $postId)
     {
-        $result = Post::with('comment')
+        $postAndComments = Post::with('comment')
             ->where('category_id', '=', $categoryId)
             ->where('posts.id', '=', $postId)
             ->get()
             ->toArray();
 
-        return $result;
+        return $postAndComments;
     }
 
     public function updatePost($id, $title, $content)

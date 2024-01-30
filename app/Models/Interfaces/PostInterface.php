@@ -4,6 +4,6 @@ namespace App\Models\Interfaces;
 
 interface PostInterface
 {
-    public function getPosts($categoryId, $postId);
+    public function getPost($categoryId, $postId);
     public function updatePost($id, $title, $content);
 }

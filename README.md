@@ -9,9 +9,6 @@ app/Models/Repositories/
 **Провайдер, який дозволяє змінити використовуваний репозиторій:**<br>
 app/Providers/RepositoryServiceProvider.php
 
-**Helper для приведення даних до єдиного (структурованого) формату:**<br>
-app/Helpers/FormatCategoryList.php
-
 <br>
 
 ### Створення структури БД та наповнення даними

@@ -2,36 +2,25 @@
 
 namespace App\Models\Repositories;
 
-use App\Helpers\FormatCategoryList;
 use App\Models\Interfaces\CategoryInterface;
 use Illuminate\Support\Facades\DB;
 
 class CategoryByQueryBuilder implements CategoryInterface
 {
-    public function __construct(FormatCategoryList $formatCategoryList)
-    {
-        $this->formatCategoryList = $formatCategoryList;
-    }
 
     public function getBlogs()
     {
         $dataset = DB::table('categories')
-            ->select(
-                'id  as category_id',
-                'name as category_name',
-                'description as category_description',
-                'created_at as category_created_at',
-                'updated_at as category_updated_at',
-            )
+            ->select('categories.*')
             ->get()
             ->toArray();
 
-        $result = $this->formatCategoryList
-            ->setSourceDataset($dataset)
-            ->setMainCategoryPrefix('category')
-            ->execute();
+        $blogs = [];
+        foreach ($dataset as $item) {
+            $blogs [] = (array)$item;
+        }
 
-        return $result;
+        return $blogs;
     }
 
     public function getCategory($categoryId)
@@ -39,12 +28,7 @@ class CategoryByQueryBuilder implements CategoryInterface
         $dataset = DB::table('categories')
             ->join('posts', 'posts.category_id', '=', 'categories.id')
             ->select(
-                'categories.id as category_id',
-                'categories.name as category_name',
-                'categories.description as category_description',
-                'categories.created_at as category_created_at',
-                'categories.updated_at as category_updated_at',
-
+                'categories.*',
                 'posts.id as post_id',
                 'posts.title as post_title',
                 'posts.content as post_content',
@@ -56,13 +40,28 @@ class CategoryByQueryBuilder implements CategoryInterface
             ->get()
             ->toArray();
 
-        $result = $this->formatCategoryList
-            ->setSourceDataset($dataset)
-            ->setMainCategoryPrefix('category')
-            ->setSubCategoryPrefix('post')
-            ->execute();
+        $posts = [];
+        foreach ($dataset as $item) {
+            $posts [] = [
+                'id' => $item->post_id,
+                'title' => $item->post_title,
+                'content' => $item->post_content,
+                'created_at' => $item->post_created_at,
+                'updated_at' => $item->post_updated_at,
+                'category_id' => $item->post_category_id,
+            ];
+        }
 
-        return $result;
+        $categoryAndPosts [] = [
+            'id' => $dataset[0]->id,
+            'name' => $dataset[0]->name,
+            'description' => $dataset[0]->description,
+            'created_at' => $dataset[0]->created_at,
+            'updated_at' => $dataset[0]->updated_at,
+            'posts' => $posts,
+        ];
+
+        return $categoryAndPosts;
     }
 
     public function addCategory($categoryName, $categoryDescription)

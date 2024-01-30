@@ -2,30 +2,18 @@
 
 namespace App\Models\Repositories;
 
-use App\Helpers\FormatCategoryList;
 use App\Models\Interfaces\PostInterface;
 use Illuminate\Support\Facades\DB;
 
 class PostByQueryBuilder implements PostInterface
 {
-    public function __construct(FormatCategoryList $formatCategoryList)
-    {
-        $this->createCategoryList = $formatCategoryList;
-    }
-
-    public function getPosts($categoryId, $postId)
+    public function getPost($categoryId, $postId)
     {
         $dataset = DB::table('categories')
             ->join('posts', 'posts.category_id', '=', 'categories.id')
             ->join('comments', 'comments.post_id', '=', 'posts.id')
             ->select(
-                'posts.id as post_id',
-                'posts.title as post_title',
-                'posts.content as post_content',
-                'posts.created_at as post_created_at',
-                'posts.updated_at as post_updated_at',
-                'posts.category_id as post_category_id',
-
+                'posts.*',
                 'comments.id as comment_id',
                 'comments.content as comment_content',
                 'comments.created_at as comment_created_at',
@@ -37,13 +25,28 @@ class PostByQueryBuilder implements PostInterface
             ->get()
             ->toArray();
 
-        $result = $this->createCategoryList
-            ->setSourceDataset($dataset)
-            ->setMainCategoryPrefix('post')
-            ->setSubCategoryPrefix('comment')
-            ->execute();
+        $comments = [];
+        foreach ($dataset as $item) {
+            $comments[] = [
+                'id' => $item->comment_id,
+                'content' => $item->comment_content,
+                'created_at' => $item->comment_created_at,
+                'updated_at' => $item->comment_updated_at,
+                'post_id' => $item->comment_post_id,
+            ];
+        }
 
-        return $result;
+        $postAndComments[] = [
+            'id' => $dataset[0]->id,
+            'title' => $dataset[0]->title,
+            'content' => $dataset[0]->content,
+            'created_at' => $dataset[0]->created_at,
+            'updated_at' => $dataset[0]->updated_at,
+            'category_id' => $dataset[0]->category_id,
+            'comments' => $comments,
+        ];
+
+        return $postAndComments;
     }
 
     public function updatePost($id, $title, $content)
