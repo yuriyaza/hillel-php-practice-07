@@ -7,7 +7,7 @@ use App\Models\Post;
 
 class PostByOrm implements PostInterface
 {
-    public function getPost($categoryId, $postId)
+    public function getPostWithComments($categoryId, $postId)
     {
         $postAndComments = Post::with('comment')
             ->where('category_id', '=', $categoryId)

@@ -7,7 +7,7 @@ use App\Models\Interfaces\CategoryInterface;
 
 class CategoryByOrm implements CategoryInterface
 {
-    public function getBlogs()
+    public function getCategories()
     {
         $blogs = Category::all()
             ->toArray();
@@ -15,7 +15,7 @@ class CategoryByOrm implements CategoryInterface
         return $blogs;
     }
 
-    public function getCategory($categoryId)
+    public function getCategoryWithPosts($categoryId)
     {
         $categoryAndPosts = Category::with('post')
             ->where('categories.id', '=', $categoryId)

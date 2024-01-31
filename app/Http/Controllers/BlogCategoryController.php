@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 
 class BlogCategoryController
 {
-    public function getCategory(CategoryInterface $blogCategory, $categoryId)
+    public function getCategoryWithPosts(CategoryInterface $blogCategory, $categoryId)
     {
         dump(
-            $blogCategory->getCategory($categoryId)
+            $blogCategory->getCategoryWithPosts($categoryId)
         );
     }
 

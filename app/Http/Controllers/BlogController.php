@@ -6,10 +6,10 @@ use App\Models\Interfaces\CategoryInterface;
 
 class BlogController
 {
-    public function getBlogs(CategoryInterface $blog)
+    public function getCategories(CategoryInterface $blog)
     {
         dump(
-            $blog->getBlogs()
+            $blog->getCategories()
         );
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 class CategoryByQueryBuilder implements CategoryInterface
 {
 
-    public function getBlogs()
+    public function getCategories()
     {
         $dataset = DB::table('categories')
             ->select('categories.*')
@@ -23,7 +23,7 @@ class CategoryByQueryBuilder implements CategoryInterface
         return $blogs;
     }
 
-    public function getCategory($categoryId)
+    public function getCategoryWithPosts($categoryId)
     {
         $dataset = DB::table('categories')
             ->join('posts', 'posts.category_id', '=', 'categories.id')
