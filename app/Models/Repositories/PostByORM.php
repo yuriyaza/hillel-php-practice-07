@@ -5,11 +5,12 @@ namespace App\Models\Repositories;
 use App\Models\Interfaces\PostInterface;
 use App\Models\Post;
 
-class PostByOrm implements PostInterface
+class PostByORM implements PostInterface
 {
-    public function getPostWithComments($postId)
+    public function getPostWithComments($categoryId, $postId)
     {
         $postAndComments = Post::with('comment')
+            ->where('category_id', '=', $categoryId)
             ->where('posts.id', '=', $postId)
             ->get()
             ->toArray();

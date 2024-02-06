@@ -5,7 +5,7 @@ namespace App\Models\Repositories;
 use App\Models\Comment;
 use App\Models\Interfaces\CommentInterface;
 
-class CommentByOrm implements CommentInterface
+class CommentByORM implements CommentInterface
 {
     public function deleteComment($id)
     {

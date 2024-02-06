@@ -9,14 +9,10 @@ app/Models/Repositories/
 **Провайдер, який дозволяє змінити використовуваний репозиторій:**<br>
 app/Providers/RepositoryServiceProvider.php
 
-<br>
-
 ### Створення структури БД та наповнення даними
 
 php artisan migrate --seed <br>
 php artisan migrate:refresh --seed
-
-<br>
 
 ### Приклади роутів для отримання даних
 

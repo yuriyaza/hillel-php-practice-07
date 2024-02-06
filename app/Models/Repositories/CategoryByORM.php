@@ -5,7 +5,7 @@ namespace App\Models\Repositories;
 use App\Models\Category;
 use App\Models\Interfaces\CategoryInterface;
 
-class CategoryByOrm implements CategoryInterface
+class CategoryByORM implements CategoryInterface
 {
     public function getCategories()
     {
