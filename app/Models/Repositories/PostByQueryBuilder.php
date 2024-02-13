@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class PostByQueryBuilder implements PostInterface
 {
-    public function getPostWithComments($categoryId, $postId)
+    public function getPostWithComments($postId)
     {
         $dataset = DB::table('posts')
             ->join('comments', 'comments.post_id', '=', 'posts.id')
@@ -19,7 +19,6 @@ class PostByQueryBuilder implements PostInterface
                 'comments.updated_at as comment_updated_at',
                 'comments.post_id as comment_post_id',
             )
-            ->where('posts.category_id', '=', $categoryId)
             ->where('posts.id', '=', $postId)
             ->get()
             ->toArray();
