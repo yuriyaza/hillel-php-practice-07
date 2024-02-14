@@ -1,9 +1,9 @@
-### Database Query Builder та ORM
+### Робота з Database Query Builder та ORM
 
 **Каталог з інтерфейсами:**<br>
 app/Models/Interfaces/
 
-**Каталог з репозиторіями:**<br>
+**Каталог з репозиторіями Query Builder/ORM:**<br>
 app/Models/Repositories/
 
 **Провайдер, який дозволяє змінити використовуваний репозиторій:**<br>
@@ -14,7 +14,7 @@ app/Providers/RepositoryServiceProvider.php
 php artisan migrate --seed <br>
 php artisan migrate:refresh --seed
 
-### Приклади роутів для отримання даних
+### Приклади роутів для роботи з даними
 
 **Вивести список всіх категорій:**<br>
 /blog

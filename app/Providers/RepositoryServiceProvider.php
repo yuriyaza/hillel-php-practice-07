@@ -19,14 +19,14 @@ class RepositoryServiceProvider extends ServiceProvider
     {
 //      Прив'язка інтерфейсу до QueryBuilder або ORM. Непотрібне закоментувати.
 
-        $this->app->bind(CategoryInterface::class, CategoryByQueryBuilder::class);
-//        $this->app->bind(CategoryInterface::class, CategoryByORM::class);
+//        $this->app->bind(CategoryInterface::class, CategoryByQueryBuilder::class);
+        $this->app->bind(CategoryInterface::class, CategoryByORM::class);
 
-        $this->app->bind(CommentInterface::class, CommentByQueryBuilder::class);
-//        $this->app->bind(CommentInterface::class, CommentByORM::class);
+//        $this->app->bind(CommentInterface::class, CommentByQueryBuilder::class);
+        $this->app->bind(CommentInterface::class, CommentByORM::class);
 
-        $this->app->bind(PostInterface::class, PostByQueryBuilder::class);
-//        $this->app->bind(PostInterface::class, PostByORM::class);
+//        $this->app->bind(PostInterface::class, PostByQueryBuilder::class);
+        $this->app->bind(PostInterface::class, PostByORM::class);
     }
 
     public function boot(): void
