@@ -17,12 +17,21 @@ class CategoryByORM implements CategoryInterface
 
     public function getCategoryWithPosts($categoryId)
     {
-        $categoryAndPosts = Category::with('post')
+        $categoryAndPosts = Category::with('posts')
             ->where('categories.id', '=', $categoryId)
             ->get()
             ->toArray();
 
         return $categoryAndPosts;
+    }
+
+    public function getCategoriesWithComments()
+    {
+        $blogs = Category::with('comments')
+            ->get()
+            ->toArray();
+
+        return $blogs;
     }
 
     public function addCategory($categoryName, $categoryDescription)

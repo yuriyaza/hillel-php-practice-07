@@ -22,5 +22,6 @@ Route::get('/blog/updatePost', [App\Http\Controllers\BlogPostController::class, 
 Route::get('/blog/deleteComment', [App\Http\Controllers\BlogCommentController::class, 'deleteComment']);
 
 Route::get('/blog', [App\Http\Controllers\BlogController::class, 'getCategories']);
+Route::get('/blogWithComments', [App\Http\Controllers\BlogController::class, 'getCategoriesWithComments']);
 Route::get('/blog/{categoryId}', [App\Http\Controllers\BlogCategoryController::class, 'getCategoryWithPosts']);
 Route::get('/blog/{categoryId}/{postId}', [App\Http\Controllers\BlogPostController::class, 'getPostWithComments']);

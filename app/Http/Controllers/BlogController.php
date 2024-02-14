@@ -12,4 +12,11 @@ class BlogController
             $blog->getCategories()
         );
     }
+
+    public function getCategoriesWithComments(CategoryInterface $blog)
+    {
+        dump(
+            $blog->getCategoriesWithComments()
+        );
+    }
 }

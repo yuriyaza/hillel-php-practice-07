@@ -11,8 +11,13 @@ class Category extends Model
 
     protected $fillable = ['name', 'description'];
 
-    public function post()
+    public function posts()
     {
         return $this->hasMany(Post::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasManyThrough(Comment::class, Post::class);
     }
 }

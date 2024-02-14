@@ -9,7 +9,7 @@ class PostByORM implements PostInterface
 {
     public function getPostWithComments($postId)
     {
-        $postAndComments = Post::with('comment')
+        $postAndComments = Post::with('comments')
             ->where('posts.id', '=', $postId)
             ->get()
             ->toArray();
