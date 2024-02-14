@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\DB;
 
 class CategoryByQueryBuilder implements CategoryInterface
 {
-
     public function getCategories()
     {
         $dataset = DB::table('categories')
@@ -40,6 +39,15 @@ class CategoryByQueryBuilder implements CategoryInterface
             ->get()
             ->toArray();
 
+        $category = [
+            'id' => $dataset[0]->id,
+            'name' => $dataset[0]->name,
+            'description' => $dataset[0]->description,
+            'created_at' => $dataset[0]->created_at,
+            'updated_at' => $dataset[0]->updated_at,
+            'posts' => [],
+        ];
+
         $posts = [];
         foreach ($dataset as $item) {
             $posts [] = [
@@ -52,16 +60,70 @@ class CategoryByQueryBuilder implements CategoryInterface
             ];
         }
 
-        $categoryAndPosts [] = [
-            'id' => $dataset[0]->id,
-            'name' => $dataset[0]->name,
-            'description' => $dataset[0]->description,
-            'created_at' => $dataset[0]->created_at,
-            'updated_at' => $dataset[0]->updated_at,
-            'posts' => $posts,
-        ];
+        $categoryWithPosts = $category;
+        $categoryWithPosts['posts'] = $posts;
 
-        return $categoryAndPosts;
+        return $categoryWithPosts;
+    }
+
+    public function getCategoriesWithComments()
+    {
+        $dataset = DB::table('categories')
+            ->leftJoin('posts', 'posts.category_id', '=', 'categories.id')
+            ->leftJoin('comments', 'comments.post_id', '=', 'posts.id')
+            ->select(
+                'categories.*',
+                'comments.id as comment_id',
+                'comments.content as comment_content',
+                'comments.created_at as comment_created_at',
+                'comments.updated_at as comment_updated_at',
+                'comments.post_id as comment_post_id',
+            )
+            ->get()
+            ->toArray();
+
+        $categories = [];
+        $comments = [];
+        $categoriesWithComments = [];
+
+        foreach ($dataset as $item) {
+            $category = [
+                'id' => $item->id,
+                'name' => $item->name,
+                'description' => $item->description,
+                'created_at' => $item->created_at,
+                'updated_at' => $item->updated_at,
+                'comments' => [],
+            ];
+
+            if (!in_array($category, $categories)) {
+                $categories[] = $category;
+            }
+
+            $comment = [
+                'id' => $item->comment_id,
+                'content' => $item->comment_content,
+                'created_at' => $item->comment_created_at,
+                'updated_at' => $item->comment_updated_at,
+                'post_id' => $item->comment_post_id,
+                'category_id' => $item->id,
+            ];
+
+            if ($comment['id'] <> null) {
+                $comments[] = $comment;
+            }
+        }
+
+        foreach ($categories as $category) {
+            foreach ($comments as $comment) {
+                if ($category['id'] === $comment['category_id']) {
+                    $category['comments'][] = $comment;
+                }
+            }
+            $categoriesWithComments[] = $category;
+        }
+
+        return $categoriesWithComments;
     }
 
     public function addCategory($categoryName, $categoryDescription)

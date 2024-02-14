@@ -25,6 +25,9 @@ php artisan migrate:refresh --seed
 **Вивести інформаю з посту за його ID, включаючи всі коментарі до даного посту:**<br>
 /blog/1/1
 
+**Вивести список всіх категорій, включаючи список всіх коментарів в даній категорії:**<br>
+/blogWithComments
+
 **Створити нову категорію:**<br>
 /blog/addCategory?name=Category name&description=Category description
 
