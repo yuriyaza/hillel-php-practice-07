@@ -19,6 +19,7 @@ Route::get('/', function () {
 
 Route::get('/blog/addCategory', [App\Http\Controllers\BlogCategoryController::class, 'addCategory']);
 Route::get('/blog/updatePost', [App\Http\Controllers\BlogPostController::class, 'updatePost']);
+Route::get('/blog/addComment', [App\Http\Controllers\BlogCommentController::class, 'addComment']);
 Route::get('/blog/deleteComment', [App\Http\Controllers\BlogCommentController::class, 'deleteComment']);
 
 Route::get('/blog', [App\Http\Controllers\BlogController::class, 'getCategories']);

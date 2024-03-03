@@ -36,3 +36,6 @@ php artisan migrate:refresh --seed
 
 **Видалити коментар за його ID:**<br>
 /blog/deleteComment?id=1
+
+**Додати коментар за ID посту, при цьому оновити мітку updated_at у відповідного коментаря, посту та категорії:**<br>
+/blog/addComment?postId=1&comment=New comment

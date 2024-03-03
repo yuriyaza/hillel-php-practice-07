@@ -12,9 +12,9 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 //      Наповнення даними за допомогою Factories
-        Category::factory(3)->create();
-        Post::factory(10)->create();
-        Comment::factory(20)->create();
+        Category::factory(5)->create();
+        Post::factory(5000)->create();
+        Comment::factory(3000)->create();
 
 //      Наповнення даними за допомогою Seeders
 //      $this->call([
