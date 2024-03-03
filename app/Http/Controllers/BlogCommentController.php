@@ -7,7 +7,17 @@ use Illuminate\Http\Request;
 
 class BlogCommentController
 {
-    public function deleteComment(CommentInterface $blogComment, Request $request)
+    public function addComment(Request $request, CommentInterface $blogComment)
+    {
+        $postId = $request->postId;
+        $comment = $request->comment;
+
+        dump(
+            $blogComment->addComment($postId, $comment)
+        );
+    }
+
+    public function deleteComment(Request $request, CommentInterface $blogComment)
     {
         $id = $request->get('id');
 
