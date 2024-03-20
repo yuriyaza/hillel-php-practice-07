@@ -20,6 +20,7 @@ class PostByQueryBuilder implements PostInterface
                 'comments.post_id as comment_post_id',
             )
             ->where('posts.id', '=', $postId)
+            ->orderBy('comments.updated_at', 'desc')
             ->get()
             ->toArray();
 

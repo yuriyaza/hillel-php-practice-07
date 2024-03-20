@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 
 class BlogPostController
 {
-    public function getPostWithComments($categoryId, $postId, PostInterface $blogPost)
+    public function getPostWithComments($postId, PostInterface $blogPost)
     {
         dump(
-            $blogPost->getPostWithComments($categoryId, $postId)
+            $blogPost->getPostWithComments($postId)
         );
     }
 
@@ -23,5 +23,22 @@ class BlogPostController
         dump(
             $blogPost->updatePost($id, $title, $content)
         );
+    }
+
+    public function viewPostWithComments(Request $request, PostInterface $blogPost)
+    {
+        $postId = $request->get('id');
+        $dataset = $blogPost->getPostWithComments($postId);
+
+        $postTitle = $dataset[0]['title'];
+        $postContent = $dataset[0]['content'];
+
+        $commentsCount = count($dataset[0]['comments'])>5 ? 5 : count($dataset[0]['comments']);
+        $commentsList = [];
+        for ($i = 0; $i < $commentsCount; $i += 1) {
+            $commentsList[] = $dataset[0]['comments'][$i];
+        }
+
+        return view('index', compact('postTitle', 'postContent', 'commentsList'));
     }
 }
