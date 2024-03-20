@@ -32,7 +32,12 @@ class CommentSeeder extends Seeder
 
         DB::table('comments')->insert([
             'content' => Lorem::text(100),
-            'post_id' => 2,
+            'post_id' => 1,
+        ]);
+
+        DB::table('comments')->insert([
+            'content' => Lorem::text(100),
+            'post_id' => 1,
         ]);
 
         DB::table('comments')->insert([
@@ -42,7 +47,12 @@ class CommentSeeder extends Seeder
 
         DB::table('comments')->insert([
             'content' => Lorem::text(100),
-            'post_id' => 3,
+            'post_id' => 2,
+        ]);
+
+        DB::table('comments')->insert([
+            'content' => Lorem::text(100),
+            'post_id' => 2,
         ]);
 
         DB::table('comments')->insert([

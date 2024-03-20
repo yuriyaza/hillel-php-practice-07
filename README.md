@@ -39,3 +39,6 @@ php artisan migrate:refresh --seed
 
 **Додати коментар за ID посту, при цьому оновити мітку updated_at у відповідного коментаря, посту та категорії:**<br>
 /blog/addComment?postId=1&comment=New comment
+
+**Відобразити HTML-шаблон з постом та останніми 5-ма коментарями до нього:**<br>
+/blog/viewPost?id=1
