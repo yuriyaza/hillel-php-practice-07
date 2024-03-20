@@ -122,6 +122,6 @@
         </div>
     </footer>
 </div>
-@vite(['resources/js/app.js']);
+@vite(['resources/js/app.js', 'resources/js/jquery.min.js', 'resources/js/bootstrap.min.js','resources/js/custom.js']);
 </body>
 </html>
