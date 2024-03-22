@@ -13,8 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {return view('welcome');});
-
 Route::get('/blog/viewPost', [App\Http\Controllers\BlogPostController::class, 'viewPostWithComments']);
 
 Route::get('/blog/addCategory', [App\Http\Controllers\BlogCategoryController::class, 'addCategory']);

@@ -39,6 +39,6 @@ class BlogPostController
             $commentsList[] = $dataset[0]['comments'][$i];
         }
 
-        return view('index', compact('postTitle', 'postContent', 'commentsList'));
+        return view('blog', compact('postTitle', 'postContent', 'commentsList'));
     }
 }
